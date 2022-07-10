@@ -12,29 +12,20 @@ function cardGalleryItems(galleryItems) {
   return galleryItems
     .map(({ preview, original, description }) => {
       return `<a class="gallery__item" href="${original}">
-      <img
-        class="gallery__image"
-        src="${preview}"
-        alt="${description}"
+  <img
+    class="gallery__image"
+      src="${preview}"
+      data-source= "${original}"
+      alt="${description}"
       />
     </a>`;
     })
     .join(' ');
 }
 
-function stopgalleryDef(event) {
-  event.preventDefault();
-}
-
-//let gallery = new SimpleLightbox('.gallery a');
-//gallery.on('show.simplelightbox', function () {
-//  <div class="gallery">
-//    <a href="images/image1.jpg">
-//      <img src="${event.target.dataset.source}" alt="" title="" />
-//    </a>
-//  </div>;
-//});
-
-//gallery.on('error.simplelightbox', function (e) {
-//  console.log(e); // Some usefull information
-//});
+const onModal = new SimpleLightbox('.gallery__item', {
+  captionSelector: 'img',
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});

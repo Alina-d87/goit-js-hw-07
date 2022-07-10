@@ -10,8 +10,6 @@ refGallery.insertAdjacentHTML('beforeend', cardGallery);
 
 refGallery.addEventListener('click', onClickGallery);
 
-//refGallery.addEventListener('keydown', onCloseGallery);
-
 function cardGalleryItems(galleryItems) {
   return galleryItems
     .map(({ preview, original, description }) => {
@@ -30,19 +28,16 @@ function cardGalleryItems(galleryItems) {
 }
 
 function onClickGallery(event) {
-  stopgalleryDef(event);
-  const instance = basicLightbox.create(`
-    <img src="${event.target.dataset.source}" width="800" height="600">
-`);
+  stopGalleryDef(event);
+  if (event.target !== event.currentTarget) {
+    const instance = basicLightbox.create(
+      `<img src="${event.target.dataset.source}" width="800" height="600">`,
+    );
 
-  instance.show();
+    return instance.show();
+  }
 }
 
-function stopgalleryDef(event) {
+function stopGalleryDef(event) {
   event.preventDefault();
 }
-
-//function onCloseGallery(event) {
-//  onClickGallery(event);
-//  instance.close(event);
-//}
